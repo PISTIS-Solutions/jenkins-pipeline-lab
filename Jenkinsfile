@@ -50,3 +50,7 @@ pipeline {
 }
 
 
+<<<<<<< HEAD:Jenkinsfile
+=======
+##
+>>>>>>> f73dc64 (credentials update):jenkinsfile
