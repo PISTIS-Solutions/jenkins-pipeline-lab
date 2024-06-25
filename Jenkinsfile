@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        EC2_IP         = credentials ('jenkins-ec2-ip') // Store EC2 instance IP as a Jenkins credential
-        SSH_USER       = credentials ('jenkins-ssh-user')        // Store SSH username as a Jenkins credential
-        SSH_KEY        = credentials ('jenkins-ssh-key')          // Store SSH private key as a Jenkins credential
+        EC2_IP         = credentials ('EC2_IP') // Store EC2 instance IP as a Jenkins credential
+        SSH_USER       = credentials ('SSH_USER')        // Store SSH username as a Jenkins credential
+        SSH_KEY        = credentials ('SSH_KEY')          // Store SSH private key as a Jenkins credential
         HTML_FILE_PATH = 'index.html'  // Path to your local HTML file
     }
 
@@ -48,12 +48,3 @@ pipeline {
         }
     }
 }
-
-
-<<<<<<< HEAD:Jenkinsfile
-<<<<<<< HEAD:Jenkinsfile
-=======
-##
->>>>>>> f73dc64 (credentials update):jenkinsfile
-=======
->>>>>>> 1187748 (credentials update):jenkinsfile
