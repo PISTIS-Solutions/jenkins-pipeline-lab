@@ -15,10 +15,10 @@ pipeline {
                     // Use SSH credentials to connect and execute commands on the EC2 instance
                     sh """
                     ssh -o StrictHostKeyChecking=no -i "${SSH_KEY}" ${SSH_USER}@${EC2_IP} << EOF
-                    sudo yum update -y
-                    sudo yum install httpd -y
-                    sudo systemctl start httpd
-                    sudo systemctl enable httpd
+                    sudo apt update -y
+                    sudo apt install apache2 -y
+                    sudo systemctl start apache2
+                    sudo systemctl enable apache2
                     EOF
                     """
                 }
