@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    environment {
+        EC2_IP = 'YOUR_EC2_INSTANCE_IP'
+        SSH_USER = 'ec2-user'
+        SSH_KEY_PATH = '/path/to/your/private/key.pem'
+        HTML_CONTENT = '<html><body><h1>Hello from Jenkins!</h1></body></html>'
+    }
+
+    stages {
+        stage('Install Apache') {
+            steps {
+                script {
+                    sh """
+                    ssh -o StrictHostKeyChecking=no -i ${SSH_KEY_PATH} ${SSH_USER}@${EC2_IP} << EOF
+                    sudo yum update -y
+                    sudo yum install httpd -y
+                    sudo systemctl start httpd
+                    sudo systemctl enable httpd
+                    EOF
+                    """
+                }
+            }
+        }
+
+        stage('Deploy HTML') {
+            steps {
+                script {
+                    sh """
+                    ssh -o StrictHostKeyChecking=no -i ${SSH_KEY_PATH} ${SSH_USER}@${EC2_IP} << EOF
+                    echo '${HTML_CONTENT}' | sudo tee /var/www/html/index.html
+                    EOF
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+    }
+}
