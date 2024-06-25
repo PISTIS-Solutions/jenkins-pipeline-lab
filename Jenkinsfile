@@ -14,12 +14,12 @@ pipeline {
                 script {
                     // Use SSH credentials to connect and execute commands on the EC2 instance
                     sh """
-ssh -o StrictHostKeyChecking=no -i "${SSH_KEY}" ${SSH_USER}@${EC2_IP} << 'EOF'
-sudo apt update -y
-sudo apt install apache2 -y
-sudo systemctl start apache2
-sudo systemctl enable apache2
-EOF
+                ssh -o StrictHostKeyChecking=no -i "${SSH_KEY}" ${SSH_USER}@${EC2_IP} << 'EOF'
+                sudo apt update -y
+                sudo apt install apache2 -y
+                sudo systemctl start apache2
+                sudo systemctl enable apache2
+                EOF
                     """
                 }
             }
@@ -33,9 +33,9 @@ EOF
 
                     // Deploy HTML content to the Apache web server on the EC2 instance
                     sh """
-ssh -o StrictHostKeyChecking=no -i "${SSH_KEY}" ${SSH_USER}@${EC2_IP} << 'EOF'
-echo '${htmlContent}' | sudo tee /var/www/html/index.html
-EOF
+                    ssh -o StrictHostKeyChecking=no -i "${SSH_KEY}" ${SSH_USER}@${EC2_IP} << 'EOF'
+                    echo '${htmlContent}' | sudo tee /var/www/html/index.html
+                    EOF
                     """
                 }
             }
