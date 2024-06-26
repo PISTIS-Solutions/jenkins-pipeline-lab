@@ -126,3 +126,5 @@ After the setup is complete, you will be redirected to the Jenkins dashboard, in
 - Blue Ocean
 - Multibranch webhook plugin
 - Git Plugin
+
+### Example of jenkins webhook: http://<your-instance-ip>/multibranch-webhook-trigger/invoke?token=my-token
