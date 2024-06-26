@@ -120,3 +120,9 @@ After the setup is complete, you will be redirected to the Jenkins dashboard, in
 ![Setup Jenkins](Images/image11.png)
 
 ![Setup Jenkins](Images/image12.png)
+
+
+## Extra Plugins to Install
+- Blue Ocean
+- Multibranch webhook plugin
+- Git Plugin
