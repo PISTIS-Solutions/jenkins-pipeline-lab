@@ -127,4 +127,5 @@ After the setup is complete, you will be redirected to the Jenkins dashboard, in
 - Multibranch webhook plugin
 - Git Plugin
 
-### Example of jenkins webhook: http://<your-instance-ip>/multibranch-webhook-trigger/invoke?token=my-token
+### Example of jenkins webhook
+-  http://<your-instance-ip>/multibranch-webhook-trigger/invoke?token=my-token
