@@ -9,7 +9,14 @@ pipeline {
     }
 
     stages {
-        stage('Install Apache') {
+        stage('Compile Stage') {
+            steps {
+                echo 'Compiling the code...'
+                // Add any compilation steps here if necessary
+            }
+        }
+
+        stage('Build Stage') {
             steps {
                 script {
                     // Use SSH credentials to connect and execute commands on the EC2 instance
@@ -25,7 +32,7 @@ EOF
             }
         }
 
-        stage('Deploy HTML') {
+        stage('Deploy') {
             steps {
                 script {
                     // Read HTML content from the local file
@@ -35,6 +42,22 @@ EOF
                     sh """
 ssh -o StrictHostKeyChecking=no -i "${SSH_KEY}" ${SSH_USER}@${EC2_IP} << 'EOF'
 echo '${htmlContent}' | sudo tee /var/www/html/index.html
+EOF
+                    """
+                }
+            }
+        }
+
+        stage('Deploy MySQL') {
+            steps {
+                script {
+                    // Install MySQL on the EC2 instance
+                    sh """
+ssh -o StrictHostKeyChecking=no -i "${SSH_KEY}" ${SSH_USER}@${EC2_IP} << 'EOF'
+sudo apt update -y
+sudo apt install mysql-server -y
+sudo systemctl start mysql
+sudo systemctl enable mysql
 EOF
                     """
                 }
